@@ -1,13 +1,26 @@
-.PHONY: install test run-producer run-streaming
+.PHONY: install test run-data run-model run-producer run-streaming
+
+VENV = .venv/bin
+PYTHON = $(VENV)/python3
+PIP = $(VENV)/pip
 
 install:
-	pip install -r requirements.txt
+	$(PIP) install -r requirements.txt
 
 test:
-	pytest tests/ -v
+	$(PYTHON) -m pytest tests/ -v
+
+run-data:
+	$(PYTHON) src/data_engineering.py
+
+run-model:
+	$(PYTHON) src/model_training.py
 
 run-producer:
-	python3 src/producer.py
+	$(PYTHON) src/producer.py
 
 run-streaming:
-	python3 src/streaming_job.py
+	$(PYTHON) src/streaming_job.py
+
+run-all: run-data run-model
+	@echo "Data engineered and model trained! To run streaming, open two terminals and run 'make run-streaming' and 'make run-producer'."
