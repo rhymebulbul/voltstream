@@ -4,3 +4,16 @@ notes/
 data/processed/
 .venv/
 models/
+
+# Python / Spark Caches
+__pycache__/
+*.py[cod]
+*$py.class
+.pytest_cache/
+spark-warehouse/
+metastore_db/
+derby.log
+
+# IDEs
+.idea/
+.vscode/
