@@ -11,3 +11,25 @@ VoltStream is an end-to-end predictive analytics platform for IoT building meter
 * `src/`: Core pipeline notebooks for data processing, model training, and Kafka streaming.
 * `data/`: Sample telemetry datasets (meters, weather, building information).
 * `models/`: Persisted PySpark PipelineModels.
+
+## Quickstart Guide
+
+**1. Setup Environment**
+```bash
+python3 -m venv .venv
+source .venv/bin/activate
+pip install -r requirements.txt
+```
+
+**2. Start Kafka Cluster**
+```bash
+docker-compose up -d
+```
+
+**3. Execute Pipeline**
+* **Phase 1 (Data Engineering):** `python3 src/data_engineering.py`
+* **Phase 2 (Model Training):** `python3 src/model_training.py`
+* **Phase 3 (Streaming):**
+  * Start the Real-Time Engine: `python3 src/streaming_job.py`
+  * Start the IoT Simulator: `python3 src/producer.py`
+  * (Optional) Watch Predictions: `python3 src/consumer.py`
